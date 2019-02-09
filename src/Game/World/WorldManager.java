@@ -214,6 +214,7 @@ public class WorldManager {
     	
     	if(randomArea instanceof GrassArea) {
     		randomArea = new GrassArea(handler, yPosition);
+    		SpawnHazard2(yPosition);
     	}
     	else if(randomArea instanceof WaterArea) {
     		randomArea = new WaterArea(handler, yPosition);
@@ -246,6 +247,15 @@ public class WorldManager {
 			SpawnedHazards.add(new Turtle(handler, randInt, yPosition));
 		}
 			
+	}
+	
+	private void SpawnHazard2(int yPosition) {
+		Random rand = new Random();
+		int randInt;
+		randInt = 64 * rand.nextInt(3);
+		SpawnedHazards.add(new Tree(handler, randInt, yPosition));
+		
+		
 	}
     
 }
