@@ -178,15 +178,34 @@ public class WorldManager {
 
 			}
 
+			if (SpawnedHazards.get(i) instanceof Tree) {
+				
+				if (SpawnedHazards.get(i).GetCollision() != null
+						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) && player.getFacing().equals("UP")) {
+					player.setY(player.getY() + player.getHeight());
+				}
+				else if (SpawnedHazards.get(i).GetCollision() != null
+						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) && player.getFacing().equals("DOWN")) {
+					player.setY(player.getY() - player.getHeight());
+				}
+				else if (SpawnedHazards.get(i).GetCollision() != null
+							&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) && player.getFacing().equals("RIGHT")) {
+						player.setX(player.getX() - player.getHeight());
+					}
+				else if (SpawnedHazards.get(i).GetCollision() != null
+						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) && player.getFacing().equals("LEFT")) {
+					player.setX(player.getX() + player.getHeight());	
+				}
+				
+			}
 			// if hazard has passed the screen height, then remove this hazard.
 			if (SpawnedHazards.get(i).getY() > handler.getHeight()) {
 				SpawnedHazards.remove(i);
 			}
 		}
 	}
-	
-	
-    public void render(Graphics g){
+
+	public void render(Graphics g){
     	
        for(BaseArea area : SpawnedAreas) {
     	   area.render(g);
@@ -252,7 +271,7 @@ public class WorldManager {
 	private void SpawnHazard2(int yPosition) {
 		Random rand = new Random();
 		int randInt;
-		randInt = 64 * rand.nextInt(3);
+		randInt = 64 * rand.nextInt(9);
 		SpawnedHazards.add(new Tree(handler, randInt, yPosition));
 		
 		
