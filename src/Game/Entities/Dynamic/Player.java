@@ -54,6 +54,10 @@ public class Player extends EntityBase {
         }
     }
 
+    public String getFacing() {
+    	return this.facing;
+    }
+    
     private void move(){
         if(moveCoolDown< 25){
             moveCoolDown++;
