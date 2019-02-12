@@ -258,8 +258,13 @@ public class WorldManager {
 			SpawnedHazards.add(new Log(handler, randInt, yPosition));
 		}
 		else if (choice >=5){
-			randInt = 64 * rand.nextInt(9);
+			randInt = 64 * rand.nextInt(7);
 			SpawnedHazards.add(new LillyPad(handler, randInt, yPosition));
+			SpawnedHazards.add(new LillyPad(handler, randInt + 128, yPosition));
+			SpawnedHazards.add(new LillyPad(handler, randInt + 64, yPosition));
+			SpawnedHazards.add(new LillyPad(handler, randInt + 192, yPosition));
+			SpawnedHazards.add(new LillyPad(handler, randInt - 256, yPosition));
+			SpawnedHazards.add(new LillyPad(handler, randInt + 448, yPosition));	
 		}
 		else {
 			randInt = 64 * rand.nextInt(3);
@@ -273,7 +278,6 @@ public class WorldManager {
 		int randInt;
 		randInt = 64 * rand.nextInt(9);
 		SpawnedHazards.add(new Tree(handler, randInt, yPosition));
-		
 		
 	}
     
