@@ -230,7 +230,7 @@ public class WorldManager {
     	
     	// From the AreasAvailable, get me any random one.
     	BaseArea randomArea = AreasAvailables.get(rand.nextInt(AreasAvailables.size())); 
-    	
+    	// Added Trees only on grass area.
     	if(randomArea instanceof GrassArea) {
     		randomArea = new GrassArea(handler, yPosition);
     		SpawnHazard2(yPosition);
@@ -258,6 +258,7 @@ public class WorldManager {
 			randInt = 64 * rand.nextInt(4);
 			SpawnedHazards.add(new Log(handler, randInt, yPosition));
 		}
+		//Added LillyPads randomly and added more than 1 in a row
 		else if (choice >=5){
 			randInt = 64 * rand.nextInt(9);
 			while (counterLillyPad > 0) {
@@ -272,7 +273,7 @@ public class WorldManager {
 		}
 			
 	}
-	
+	//Method to add tree only in the grass area
 	private void SpawnHazard2(int yPosition) {
 		Random rand = new Random();
 		int randInt;
