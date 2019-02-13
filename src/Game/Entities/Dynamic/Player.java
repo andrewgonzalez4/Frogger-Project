@@ -54,11 +54,16 @@ public class Player extends EntityBase {
 		}
 	}
 
-	private void move(){
-		if(moveCoolDown< 25){
-			moveCoolDown++;
-		}
-		index=0;
+    public String getFacing() {
+    	return this.facing;
+    }
+    
+    private void move(){
+        if(moveCoolDown< 25){
+            moveCoolDown++;
+        }
+        index=0;
+
 
 		/////////////////MOVE UP///////////////
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W) && !moving && facing.equals("UP")){

@@ -44,6 +44,10 @@ public class Images {
     public static BufferedImage lilly;
     public static BufferedImage log;
     public static BufferedImage grass;
+    public static BufferedImage bigtree;
+    public static BufferedImage treebush;
+    public static BufferedImage ptree;
+    public static BufferedImage gtree;
 
     public static BufferedImage[] object;
 
@@ -134,6 +138,10 @@ public class Images {
             
             player = ImageIO.read(getClass().getResourceAsStream("/Sheets/froggy.png"));
             grass = ImageIO.read(getClass().getResourceAsStream("/Sheets/grass.jpg"));
+            treebush = ImageIO.read(getClass().getResourceAsStream("/Sheets/treebush.png"));
+            ptree = ImageIO.read(getClass().getResourceAsStream("/Sheets/ptree.png"));
+            gtree = ImageIO.read(getClass().getResourceAsStream("/Sheets/gtree.png"));
+            bigtree = ImageIO.read(getClass().getResourceAsStream("/Sheets/bigtree.jpg"));
 
             grassArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/grassArea.png"));
             waterArea = ImageIO.read(getClass().getResourceAsStream("/Sheets/waterArea.png"));
