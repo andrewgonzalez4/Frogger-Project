@@ -69,6 +69,7 @@ public class Player extends EntityBase {
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_W) && !moving && facing.equals("UP")){
 
 
+			//If the player tries to get out of the game, dont let him!!!
 			if(this.getY() < 64){
 				setY(getY() + 64);
 			}
@@ -101,6 +102,7 @@ public class Player extends EntityBase {
 		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_A) && !moving && facing.equals("LEFT")){
 
 
+			//If the player tries to get out of the game, dont let him!!!
 			if(this.getX() < 64) {
 
 				setX(getX()+64);
@@ -131,6 +133,8 @@ public class Player extends EntityBase {
 		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_D) && !moving && facing.equals("RIGHT")){
 
 
+			
+			//If the player tries to get out of the game, dont let him!!!
 			if(this.getX() == 576) {
 
 				setX(getX()-64);
