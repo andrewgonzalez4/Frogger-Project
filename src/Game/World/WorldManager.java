@@ -276,7 +276,7 @@ public class WorldManager {
 			while (counterLillyPad >= 0) {
 				SpawnedHazards.add(new LillyPad(handler, randInt, yPosition));
 				previousSpawnedY = true;
-				randInt = 64 * rand.nextInt(9);
+				randInt = 64 * rand.nextInt(7);
 				counterLillyPad--;
 			}
 			previousSpawnedY = true;
