@@ -44,7 +44,7 @@ public class WorldManager {
 	private ID[][] grid;									
 	private int gridWidth,gridHeight;						// Size of the grid. 
 	private int movementSpeed;								// Movement of the tiles going downwards.
-	private boolean previousSpawnedY = false;               // Prevent two Lily Pads from spawning two Y levels consecutively.
+	private boolean previousSpawnedY = false;               // Prevents two Lily Pads from spawning two Y levels consecutively.
 
 
 	public WorldManager(Handler handler) {
@@ -141,7 +141,7 @@ public class WorldManager {
 				// Replace with a new random area and position it on top
 				SpawnedAreas.set(i, randomArea(-2 * 64));
 			}
-			//Make sure players position is synchronized with area's movement
+			// Make sure players position is synchronized with area's movement
 			if (SpawnedAreas.get(i).getYPosition() < player.getY()
 					&& player.getY() - SpawnedAreas.get(i).getYPosition() < 3) {
 				player.setY(SpawnedAreas.get(i).getYPosition());
@@ -151,7 +151,7 @@ public class WorldManager {
 		HazardMovement();
 
 		player.tick();
-		//make player move the same as the areas
+		// Make player move the same as the areas
 		player.setY(player.getY()+movementSpeed); 
 
 		object2.tick();
@@ -171,35 +171,30 @@ public class WorldManager {
 
 				// Verifies the hazards Rectangles aren't null and
 				// If the player Rectangle intersects with the Log or Turtle Rectangle, then
-				// move player to the right.
+				// Moves player to the right.
 				if (SpawnedHazards.get(i).GetCollision() != null
 						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
 					player.setX(player.getX() + 1);
 				}
 
 			}
-
-			if (SpawnedHazards.get(i) instanceof Tree) {
-
-				if (SpawnedHazards.get(i).GetCollision() != null
-						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) && player.getFacing().equals("UP")) {
+            // Prevents the frog to go through the trees.
+			if (SpawnedHazards.get(i) instanceof Tree && SpawnedHazards.get(i).GetCollision() != null
+					&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
+				if(player.getFacing().equals("UP")) {
 					player.setY(player.getY() + player.getHeight());
 				}
-				else if (SpawnedHazards.get(i).GetCollision() != null
-						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) && player.getFacing().equals("DOWN")) {
+				else if (player.getFacing().equals("DOWN")) {
 					player.setY(player.getY() - player.getHeight());
 				}
-				else if (SpawnedHazards.get(i).GetCollision() != null
-						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) && player.getFacing().equals("RIGHT")) {
+				else if (player.getFacing().equals("RIGHT")) {
 					player.setX(player.getX() - player.getHeight());
 				}
-				else if (SpawnedHazards.get(i).GetCollision() != null
-						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) && player.getFacing().equals("LEFT")) {
+				else if (player.getFacing().equals("LEFT")) {
 					player.setX(player.getX() + player.getHeight());	
 				}
-
 			}
-//			if hazard has passed the screen height, then remove this hazard.
+            // if hazard has passed the screen height, then remove this hazard.
 			if (SpawnedHazards.get(i).getY() > handler.getHeight()) {
 				SpawnedHazards.remove(i);
 			}
@@ -231,7 +226,7 @@ public class WorldManager {
 
 		// From the AreasAvailable, get me any random one.
 		BaseArea randomArea = AreasAvailables.get(rand.nextInt(AreasAvailables.size())); 
-		// Added Trees only on grass area.
+		// Added trees only on grass area.
 		if(randomArea instanceof GrassArea) {
 			randomArea = new GrassArea(handler, yPosition);
 			SpawnHazard2(yPosition);
@@ -275,7 +270,7 @@ public class WorldManager {
 			SpawnedHazards.add(new Log(handler, randInt, yPosition));
 			previousSpawnedY = false;
 		}
-		//Added LillyPads randomly and added more than 1 in a row
+		// Add LillyPads randomly and add more than 1 in a row.
 		else if (choice >=5 && previousSpawnedY != true) {
 			randInt = 64 * rand.nextInt(9);
 			while (counterLillyPad >= 0) {
@@ -293,7 +288,7 @@ public class WorldManager {
 		}
 
 	}
-	//Method to add tree only in the grass area
+	// Method to add trees only in the grass area
 	private void SpawnHazard2(int yPosition) {
 		Random rand = new Random();
 		int randInt;
