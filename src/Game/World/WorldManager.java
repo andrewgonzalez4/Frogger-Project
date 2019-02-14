@@ -151,7 +151,7 @@ public class WorldManager {
 		HazardMovement();
 
 		player.tick();
-		// Make player move the same as the areas
+		// Make player move the same as the areas.
 		player.setY(player.getY()+movementSpeed); 
 
 		object2.tick();
@@ -240,7 +240,7 @@ public class WorldManager {
 		}
 		return randomArea;
 	}
-
+    // Method for Water No-Spawn
 	private BaseArea randomArea2(int yPosition) {
 		Random rand = new Random();
 
