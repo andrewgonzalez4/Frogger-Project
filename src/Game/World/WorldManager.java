@@ -165,8 +165,8 @@ public class WorldManager {
 			// Moves hazard down
 			SpawnedHazards.get(i).setY(SpawnedHazards.get(i).getY() + movementSpeed);
 
-			// Moves Log or Turtle to the right
-			if (SpawnedHazards.get(i) instanceof Log || SpawnedHazards.get(i) instanceof Turtle) {
+			// Moves Log to the right
+			if (SpawnedHazards.get(i) instanceof Log) {
 				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getX() + 1);
 
 				// Verifies the hazards Rectangles aren't null and
@@ -176,8 +176,20 @@ public class WorldManager {
 						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
 					player.setX(player.getX() + 1);
 				}
-
 			}
+			// Moves Turtles to the left and make them loop the screen
+			if (SpawnedHazards.get(i) instanceof Turtle) {
+				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getX() - 1);
+
+				if (SpawnedHazards.get(i).GetCollision() != null
+						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) ) {
+					player.setX(player.getX() - 1);
+				}
+				if (SpawnedHazards.get(i).getX() + 80 < 0) {
+					SpawnedHazards.get(i).setX(this.handler.getWidth());
+				}
+			}
+			
             // Prevents the frog to go through the trees.
 			if (SpawnedHazards.get(i) instanceof Tree && SpawnedHazards.get(i).GetCollision() != null
 					&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
@@ -282,7 +294,7 @@ public class WorldManager {
 			previousSpawnedY = true;
 		}
 		else {
-			randInt = 64 * rand.nextInt(3);
+			randInt = this.handler.getWidth();
 			SpawnedHazards.add(new Turtle(handler, randInt, yPosition));
 			previousSpawnedY = false;
 		}
