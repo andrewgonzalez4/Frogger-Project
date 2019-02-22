@@ -9,6 +9,7 @@ import UI.UIObject;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+
 /**
  * Created by AlexVR on 7/1/2018.
  */
@@ -30,6 +31,7 @@ public class Images {
     public static BufferedImage icon2;
 
     public static SpriteSheet playerSheet;
+    public static SpriteSheet playerSheet2;
     public static BufferedImage[] Player;
     public static BufferedImage[] Turtle;
     public static SpriteSheet WaterSheet;
@@ -65,6 +67,7 @@ public class Images {
 
         try {
             playerSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/gameSprites.png")));
+            playerSheet2 = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/flippedGameSprites.png")));
             WaterSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/water.png")));
 
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/Frogger2.png"));
@@ -86,37 +89,37 @@ public class Images {
             Player[4]= playerSheet.crop(230,2,54,73);
             Player[5]= playerSheet.crop(229,1,56,75);
             Player[6]= playerSheet.crop(285,18,59,54);
-            Player[7]= playerSheet.crop(0,30,52,39);Player[0]= playerSheet.crop(0,30,52,39);
+            Player[7]= playerSheet.crop(0,30,52,39);
             
             // emerges
-            Turtle[0] = playerSheet.crop(502, 88, 71, 57);
-            Turtle[1] = playerSheet.crop(447, 88, 71, 57);
-            Turtle[2] = playerSheet.crop(379, 88, 71, 57);
+            Turtle[0] = playerSheet2.crop(26, 88, 71, 57);
+            Turtle[1] = playerSheet2.crop(90, 88, 71, 57);
+            Turtle[2] = playerSheet2.crop(152, 88, 71, 57);
             
-            Turtle[3] = playerSheet.crop(403, 10, 71, 58);
-            Turtle[4] = playerSheet.crop(479, 8, 71, 62);
+            Turtle[3] = playerSheet2.crop(126, 10, 71, 58);
+            Turtle[4] = playerSheet2.crop(50, 8, 71, 62);
             
-            Turtle[5] = playerSheet.crop(7, 82, 71, 68);
-            Turtle[6] = playerSheet.crop(79, 82, 72, 68);
-            Turtle[7] = playerSheet.crop(153, 83, 71, 66);
+            Turtle[5] = playerSheet2.crop(521, 82, 72, 68);
+            Turtle[6] = playerSheet2.crop(448, 82, 72, 68);
+            Turtle[7] = playerSheet2.crop(375, 82, 72, 68);
             
-            Turtle[8] = playerSheet.crop(228, 88, 72, 57);
-            Turtle[9] = playerSheet.crop(300, 88, 71, 57);
-            Turtle[10] = playerSheet.crop(403, 10, 71, 58);
+            Turtle[8] = playerSheet2.crop(300, 88, 72, 58);
+            Turtle[9] = playerSheet2.crop(228, 88, 72, 58);
+            Turtle[10] = playerSheet2.crop(126, 10, 71, 58);
             
-            Turtle[11] = playerSheet.crop(479, 8, 71, 62);
-            Turtle[12] = playerSheet.crop(7, 82, 71, 68);
-            Turtle[13] = playerSheet.crop(79, 82, 72, 68);
+            Turtle[11] = playerSheet2.crop(50, 8, 71, 62);
+            Turtle[12] = playerSheet2.crop(521, 82, 72, 68);
+            Turtle[13] = playerSheet2.crop(448, 82, 72, 68);
             
 
-            Turtle[14] = playerSheet.crop(153, 83, 71, 66);
-            Turtle[15] = playerSheet.crop(228, 88, 72, 57);
-            Turtle[16] = playerSheet.crop(300, 88, 71, 57);
+            Turtle[14] = playerSheet2.crop(375, 82, 72, 68);
+            Turtle[15] = playerSheet2.crop(300, 88, 72, 58);
+            Turtle[16] = playerSheet2.crop(228, 88, 72, 58);
             
             // sinks
-            Turtle[17] = playerSheet.crop(379, 88, 71, 57);
-            Turtle[18] = playerSheet.crop(447, 88, 71, 57);
-            Turtle[19] = playerSheet.crop(502, 88, 71, 57);
+            Turtle[17] = playerSheet2.crop(152, 88, 71, 57);
+            Turtle[18] = playerSheet2.crop(90, 88, 71, 57);
+            Turtle[19] = playerSheet2.crop(26, 88, 71, 57);
 
             Water[0]= WaterSheet.crop(0,0,32,32);
             Water[1]= WaterSheet.crop(32,0,32,32);
