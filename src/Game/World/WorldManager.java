@@ -206,13 +206,17 @@ public class WorldManager {
 					player.setX(player.getX() + 10);	
 				}
 			}
-            // if hazard has passed the screen height, then remove this hazard.
+            // If hazard has passed the screen height, then remove this hazard.
 			if (SpawnedHazards.get(i).getY() > handler.getHeight()) {
 				SpawnedHazards.remove(i);
 			}
+			// Kill player when the lower screen gets him.
+			if (player.getY() - player.getHeight() > handler.getHeight()) {
+				player.kill();
+			}
 		}
 	}
-
+ 
 	public void render(Graphics g){
 
 		for(BaseArea area : SpawnedAreas) {

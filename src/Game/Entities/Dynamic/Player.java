@@ -1,6 +1,7 @@
 package Game.Entities.Dynamic;
 
 import Game.Entities.EntityBase;
+import Game.GameStates.State;
 import Main.Handler;
 import Resources.Images;
 
@@ -262,4 +263,7 @@ public class Player extends EntityBase {
 		return player;
 	}
 
+	public void kill(){
+		State.setState(handler.getGame().gameOverState);	
+	}
 }
