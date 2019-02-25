@@ -264,6 +264,8 @@ public class Player extends EntityBase {
 	}
 
 	public void kill(){
-		State.setState(handler.getGame().gameOverState);	
+		handler.getGame().musicHandler.set_changeMusic("res/music/sound-frogger-dead.wav");
+		handler.getGame().musicHandler.play();
+		State.setState(handler.getGame().gameOverState);		
 	}
 }
