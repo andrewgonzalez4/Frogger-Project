@@ -8,6 +8,16 @@ import Resources.Images;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
+
+import Display.DisplayScreen;
 
 /*
  * The Frog.
@@ -20,6 +30,9 @@ public class Player extends EntityBase {
 	private String facing = "UP";
 	private Boolean moving = false;
 	private int moveCoolDown=0;
+	private int score;
+	private String highScore;
+	private int downwardUnits;
 
 	private int index =0;
 
@@ -27,6 +40,7 @@ public class Player extends EntityBase {
 		super(handler);
 		this.handler = handler;
 		this.handler.getEntityManager().getEntityList().add(this);
+		highScore = this.getHighScore();
 
 		player = new Rectangle(); 	// see UpdatePlayerRectangle(Graphics g) for its usage.
 	}
@@ -63,6 +77,7 @@ public class Player extends EntityBase {
         if(moveCoolDown< 25){
             moveCoolDown++;
         }
+        addScore();
         index=0;
 
 
@@ -261,6 +276,71 @@ public class Player extends EntityBase {
 
 	public Rectangle getPlayerCollision() {
 		return player;
+	}
+	
+	public void addScore() {
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W) && facing.equals("UP")) {
+			if(downwardUnits == 0){
+				score += 10;
+				DisplayScreen.setMessage(String.format("Current score: %d; %s", score, highScore));  
+			}
+			else {
+				downwardUnits--;
+			}
+		}
+		else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S) && facing.equals("DOWN")) {
+			downwardUnits++;
+		}
+	}
+	
+	public String getHighScore(){
+		BufferedReader reader = null;
+		try{
+			reader = new BufferedReader(new FileReader("highscore.dat"));
+			return reader.readLine();
+		}catch(Exception e){
+			return "highest score: 0 (by nobody)";
+		}
+		finally{
+			try {
+				if(reader != null){
+					reader.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void checkScore(){
+		if(score > Integer.parseInt(highScore.substring(highScore.indexOf(":") + 2, highScore.indexOf("(")-1))) {
+			String name = (String) JOptionPane.showInputDialog(null, "You set a new high score.\nPlease enter your name: ", "Congratulations!", JOptionPane.INFORMATION_MESSAGE, Images.icon2, null, "");
+			if(name == null){
+				name = "somebody";
+			}
+			
+			highScore = String.format("highest score: %d (by %s)", score, name); 
+
+			File scoreFile = new File("highscore.dat");
+			BufferedWriter writer;
+			if(!scoreFile.exists()){
+				try {
+					scoreFile.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}			
+			}
+			try {
+				writer = new BufferedWriter(new FileWriter(scoreFile));
+				writer.write(highScore);
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void kill(){

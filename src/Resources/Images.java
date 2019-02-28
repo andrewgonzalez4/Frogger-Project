@@ -30,8 +30,8 @@ public class Images {
     public static BufferedImage[] No;
     public static BufferedImage gameOver;
     public static ImageIcon icon;
+    public static ImageIcon icon2;
     public static String str;
-    public static BufferedImage icon2;
 
     public static SpriteSheet playerSheet;
     public static SpriteSheet playerSheet2;
@@ -148,6 +148,7 @@ public class Images {
             str = GameSetUp.str;
 
             icon =  new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/Sheets/froggy.png")));
+            icon2 =  new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/Sheets/pixelfrogger.png")));
             
             player = ImageIO.read(getClass().getResourceAsStream("/Sheets/froggy.png"));
             grass = ImageIO.read(getClass().getResourceAsStream("/Sheets/grass.jpg"));

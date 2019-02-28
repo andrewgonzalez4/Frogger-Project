@@ -19,7 +19,8 @@ public class GameOverState extends State {
         handler.getMouseManager().setUimanager(uiManager);
 
         uiManager.addObjects(new UIImageButton(33, handler.getGame().getHeight() - 150, 128, 64, Images.Yes, () -> {
-			handler.getGame().musicHandler.play();
+        	handler.getWorld().player.checkScore();
+        	handler.getGame().musicHandler.play();
 			handler.getGame().getDisplay().setBackgroundColor(Color.gray);
 			State.setState(handler.getGame().menuState);
 			DisplayScreen.setMessage("It's Frogger Time!");
@@ -27,6 +28,7 @@ public class GameOverState extends State {
 
         uiManager.addObjects(new UIImageButton(33 + 192*2, handler.getGame().getHeight() - 150, 128, 64, Images.No, () -> {
             handler.getMouseManager().setUimanager(null);
+            handler.getWorld().player.checkScore();
         }));
     }
 
