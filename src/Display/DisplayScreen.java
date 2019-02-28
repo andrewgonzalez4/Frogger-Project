@@ -65,7 +65,7 @@ public class DisplayScreen {
         frame.add(message, BorderLayout.SOUTH);
 
         try {
-            frame.setIconImage(ImageIO.read(new File("res/Sheets/pixelfrogger.png")));
+            frame.setIconImage(ImageIO.read(new File("res/Sheets/froggy.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
