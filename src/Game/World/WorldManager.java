@@ -176,6 +176,11 @@ public class WorldManager {
 						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
 					player.setX(player.getX() + 1);
 				}
+
+				if(SpawnedHazards.get(i).getX() > 576) {
+
+					SpawnedHazards.get(i).setX(-128);
+				}
 			}
 			// Moves Turtles to the left and make them loop the screen
 			if (SpawnedHazards.get(i) instanceof Turtle) {
@@ -189,8 +194,8 @@ public class WorldManager {
 					SpawnedHazards.get(i).setX(this.handler.getWidth());
 				}
 			}
-			
-            // Prevents the frog to go through the trees.
+
+			// Prevents the frog to go through the trees.
 			if (SpawnedHazards.get(i) instanceof Tree && SpawnedHazards.get(i).GetCollision() != null
 					&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
 				if(player.getFacing().equals("UP")) {
@@ -206,7 +211,7 @@ public class WorldManager {
 					player.setX(player.getX() + 10);	
 				}
 			}
-            // If hazard has passed the screen height, then remove this hazard.
+			// If hazard has passed the screen height, then remove this hazard.
 			if (SpawnedHazards.get(i).getY() > handler.getHeight()) {
 				SpawnedHazards.remove(i);
 			}
@@ -214,9 +219,17 @@ public class WorldManager {
 			if (player.getY() - player.getHeight() > handler.getHeight()) {
 				player.kill();
 			}
+
+			for(int i1 = 0; i1 < SpawnedAreas.size();i1++) {
+				if(SpawnedAreas.get(i1) instanceof WaterArea && SpawnedAreas.get(i1).getYPosition() == player.getY()) {
+
+					player.kill();
+
+				}
+			}
 		}
 	}
- 
+
 	public void render(Graphics g){
 
 		for(BaseArea area : SpawnedAreas) {
@@ -256,7 +269,7 @@ public class WorldManager {
 		}
 		return randomArea;
 	}
-    // Method for Water No-Spawn
+	// Method for Water No-Spawn
 	private BaseArea randomArea2(int yPosition) {
 		Random rand = new Random();
 
@@ -282,10 +295,19 @@ public class WorldManager {
 		int counterLillyPad = rand.nextInt(9);
 		// Chooses between Log or Lillypad
 		if (choice <=2) {
-			randInt = 64 * rand.nextInt(4);
-			SpawnedHazards.add(new Log(handler, randInt, yPosition));
+			randInt = 128 * rand.nextInt(4);
+			//SpawnedHazards.add(new Log(handler, randInt, yPosition));
+			previousSpawnedY = false;
+
+			while(counterLog >= 0) {
+
+				SpawnedHazards.add(new Log(handler, randInt, yPosition));
+				randInt = 128 * rand.nextInt(5) + 1;
+				counterLog--;
+			}
 			previousSpawnedY = false;
 		}
+
 		// Add LillyPads randomly and add more than 1 in a row.
 		else if (choice >=5 && previousSpawnedY != true) {
 			randInt = 64 * rand.nextInt(9);
