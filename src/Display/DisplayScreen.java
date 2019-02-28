@@ -40,7 +40,7 @@ public class DisplayScreen {
     
     private void createDisplay() {
     	try {
-			messageFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("res/Fonts/aerial.ttf"))).deriveFont(Font.PLAIN, 14);
+			messageFont = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("res/Fonts/aerial.ttf"))).deriveFont(Font.PLAIN, 12);
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -65,7 +65,7 @@ public class DisplayScreen {
         frame.add(message, BorderLayout.SOUTH);
 
         try {
-            frame.setIconImage(ImageIO.read(new File("res/Sheets/froggy.png")));
+            frame.setIconImage(ImageIO.read(new File("res/Sheets/pixelfrogger.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
