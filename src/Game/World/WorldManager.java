@@ -35,7 +35,7 @@ public class WorldManager {
 	Handler handler;
 
 
-	private Player player;									// How do we find the frog coordinates? How do we find the Collisions? This bad boy.
+	public Player player;									// How do we find the frog coordinates? How do we find the Collisions? This bad boy.
 
 	UIManager object = new UIManager(handler);
 	UI.UIManager.Vector object2 = object.new Vector();
@@ -45,7 +45,6 @@ public class WorldManager {
 	private int gridWidth,gridHeight;						// Size of the grid. 
 	private int movementSpeed;								// Movement of the tiles going downwards.
 	private boolean previousSpawnedY = false;               // Prevents two Lily Pads from spawning two Y levels consecutively.
-
 
 	public WorldManager(Handler handler) {
 		this.handler = handler;
@@ -177,6 +176,7 @@ public class WorldManager {
 					player.setX(player.getX() + 1);
 				}
 
+				//Reappear on screen
 				if(SpawnedHazards.get(i).getX() > 576) {
 
 					SpawnedHazards.get(i).setX(-128);
@@ -219,13 +219,22 @@ public class WorldManager {
 			if (player.getY() - player.getHeight() > handler.getHeight()) {
 				player.kill();
 			}
-
-			for(int i1 = 0; i1 < SpawnedAreas.size();i1++) {
-				if(SpawnedAreas.get(i1) instanceof WaterArea && SpawnedAreas.get(i1).getYPosition() == player.getY()) {
-
-					player.kill();
-
+            // Kill player when he touches the water
+			boolean deadFroggy = false;
+			
+			for (int j = 0; j < SpawnedAreas.size();j++) {
+				if(SpawnedAreas.get(j) instanceof WaterArea && SpawnedAreas.get(j).getYPosition() <= player.getPlayerCollision().getY()
+						&& (SpawnedAreas.get(j).getYPosition() + 66) >= (player.getPlayerCollision().getY() + player.getPlayerCollision().getHeight())) {
+					deadFroggy = true;
+					
+					if(notInDanger(player.getPlayerCollision())) {
+						deadFroggy = false;
+					}
 				}
+			}
+			
+			if(deadFroggy) {
+				player.kill();
 			}
 		}
 	}
@@ -269,6 +278,7 @@ public class WorldManager {
 		}
 		return randomArea;
 	}
+	
 	// Method for Water No-Spawn
 	private BaseArea randomArea2(int yPosition) {
 		Random rand = new Random();
@@ -285,6 +295,7 @@ public class WorldManager {
 		}
 		return randomArea2;
 	}
+	
 	/*
 	 * Given a yPositionm this method will add a new hazard to the SpawnedHazards ArrayList
 	 */
@@ -293,14 +304,12 @@ public class WorldManager {
 		int randInt;
 		int choice = rand.nextInt(9);
 		int counterLillyPad = rand.nextInt(9);
+		int counterLog = rand.nextInt(9);
 		// Chooses between Log or Lillypad
 		if (choice <=2) {
 			randInt = 128 * rand.nextInt(4);
-			//SpawnedHazards.add(new Log(handler, randInt, yPosition));
 			previousSpawnedY = false;
-
 			while(counterLog >= 0) {
-
 				SpawnedHazards.add(new Log(handler, randInt, yPosition));
 				randInt = 128 * rand.nextInt(5) + 1;
 				counterLog--;
@@ -332,7 +341,16 @@ public class WorldManager {
 		int randInt;
 		randInt = 64 * rand.nextInt(9);
 		SpawnedHazards.add(new Tree(handler, randInt, yPosition));
-
 	}
-
+	// Checks if the frog is on top of a hazard in the water area
+	public boolean notInDanger(Rectangle player) {
+		for (int i = 0; i < SpawnedHazards.size(); i++) {
+			if (SpawnedHazards.get(i).GetCollision() != null
+					&& player.intersects(SpawnedHazards.get(i).GetCollision())) {
+				return true;
+			}
+		}
+		return false;
+	}
+		
 }
