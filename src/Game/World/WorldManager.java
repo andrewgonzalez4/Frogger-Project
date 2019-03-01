@@ -169,7 +169,7 @@ public class WorldManager {
 				SpawnedHazards.get(i).setX(SpawnedHazards.get(i).getX() + 1);
 
 				// Verifies the hazards Rectangles aren't null and
-				// If the player Rectangle intersects with the Log or Turtle Rectangle, then
+				// If the player Rectangle intersects with the Log Rectangle,then
 				// Moves player to the right.
 				if (SpawnedHazards.get(i).GetCollision() != null
 						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
@@ -177,7 +177,7 @@ public class WorldManager {
 					hazardBoundaries();
 				}
 
-				//Reappear on screen
+				// Make logs loop the screen
 				if(SpawnedHazards.get(i).getX() > 576) {
 
 					SpawnedHazards.get(i).setX(-128);
@@ -192,6 +192,7 @@ public class WorldManager {
 					player.setX(player.getX() - 1);
 					hazardBoundaries();
 				}
+				// Make Turtles loop the screen
 				if (SpawnedHazards.get(i).getX() + 80 < 0) {
 					SpawnedHazards.get(i).setX(this.handler.getWidth());
 				}
@@ -240,7 +241,7 @@ public class WorldManager {
 			}
 		}
 	}
-	
+	// Added boundaries when the player is on top of Turtle or Log 
 	public void hazardBoundaries() {
 		if (player.getX() < 0 && player.getFacing().equals("RIGHT")
 				|| player.getX() < 0 && player.getFacing().equals("UP")

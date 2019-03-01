@@ -75,7 +75,7 @@ public class Images {
             playerSheet2 = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/flippedGameSprites.png")));
             WaterSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/water.png")));
 
-            title = ImageIO.read(getClass().getResourceAsStream("/Sheets/Frogger2.png"));
+            title = ImageIO.read(getClass().getResourceAsStream("/Sheets/mainimage.jpg"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/pause.png"));
             gameOver = ImageIO.read(getClass().getResourceAsStream("/Sheets/gameOver.jpg"));
             Resume[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeB.png"));
