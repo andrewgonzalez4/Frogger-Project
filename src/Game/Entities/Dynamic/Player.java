@@ -343,6 +343,13 @@ public class Player extends EntityBase {
 		}
 	}
 
+	public void closeGame() {
+		if (score < Integer.parseInt(highScore.substring(highScore.indexOf(":") + 2, highScore.indexOf("(")-1))) {
+			System.exit(0);
+		}
+	}
+	
+	
 	public void kill(){
 		handler.getGame().musicHandler.set_changeMusic("res/music/sound-frogger-dead.wav");
 		handler.getGame().musicHandler.play();

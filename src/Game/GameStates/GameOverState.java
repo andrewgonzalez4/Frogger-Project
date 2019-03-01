@@ -29,6 +29,8 @@ public class GameOverState extends State {
         uiManager.addObjects(new UIImageButton(33 + 192*2, handler.getGame().getHeight() - 150, 128, 64, Images.No, () -> {
             handler.getMouseManager().setUimanager(null);
             handler.getWorld().player.checkScore();
+            handler.getWorld().player.closeGame();
+            
         }));
     }
 
