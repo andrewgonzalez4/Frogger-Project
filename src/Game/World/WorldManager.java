@@ -174,6 +174,7 @@ public class WorldManager {
 				if (SpawnedHazards.get(i).GetCollision() != null
 						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision())) {
 					player.setX(player.getX() + 1);
+					hazardBoundaries();
 				}
 
 				//Reappear on screen
@@ -189,6 +190,7 @@ public class WorldManager {
 				if (SpawnedHazards.get(i).GetCollision() != null
 						&& player.getPlayerCollision().intersects(SpawnedHazards.get(i).GetCollision()) ) {
 					player.setX(player.getX() - 1);
+					hazardBoundaries();
 				}
 				if (SpawnedHazards.get(i).getX() + 80 < 0) {
 					SpawnedHazards.get(i).setX(this.handler.getWidth());
@@ -237,6 +239,22 @@ public class WorldManager {
 				player.kill();
 			}
 		}
+	}
+	
+	public void hazardBoundaries() {
+		if (player.getX() < 0 && player.getFacing().equals("RIGHT")
+				|| player.getX() < 0 && player.getFacing().equals("UP")
+				|| player.getX() < 0 && player.getFacing().equals("DOWN")
+				|| player.getX() < 0 && player.getFacing().equals("LEFT")) {
+			player.setX(player.getX() + 5);
+		    }
+		if (player.getX() > 576 && player.getFacing().equals("RIGHT")
+				|| player.getX() + 64 > 576 && player.getFacing().equals("UP")
+				|| player.getX() + 64 > 576 && player.getFacing().equals("DOWN")
+				|| player.getX() + 64 > 576 && player.getFacing().equals("LEFT")) {
+			player.setX(player.getX() - 5);
+		}
+		    
 	}
 
 	public void render(Graphics g){
@@ -304,14 +322,16 @@ public class WorldManager {
 		int randInt;
 		int choice = rand.nextInt(9);
 		int counterLillyPad = rand.nextInt(9);
-		int counterLog = rand.nextInt(9);
+		int counterLog = rand.nextInt(5);
 		// Chooses between Log or Lillypad
 		if (choice <=2) {
-			randInt = 128 * rand.nextInt(4);
+			randInt = 64 * rand.nextInt(1);
 			previousSpawnedY = false;
+			if (counterLog == 0)
+				counterLog = rand.nextInt(4);
 			while(counterLog >= 0) {
 				SpawnedHazards.add(new Log(handler, randInt, yPosition));
-				randInt = 128 * rand.nextInt(5) + 1;
+				randInt = 128 + randInt;
 				counterLog--;
 			}
 			previousSpawnedY = false;
