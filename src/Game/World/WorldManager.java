@@ -323,16 +323,14 @@ public class WorldManager {
 		int randInt;
 		int choice = rand.nextInt(9);
 		int counterLillyPad = rand.nextInt(9);
-		int counterLog = rand.nextInt(5);
+		int counterLog = rand.nextInt(4);
 		// Chooses between Log or Lillypad
 		if (choice <=2) {
-			randInt = 64 * rand.nextInt(1);
+			randInt = 128* rand.nextInt(4);
 			previousSpawnedY = false;
-			if (counterLog == 0)
-				counterLog = rand.nextInt(4);
 			while(counterLog >= 0) {
 				SpawnedHazards.add(new Log(handler, randInt, yPosition));
-				randInt = 128 + randInt;
+				randInt -= 160 + rand.nextInt(32);
 				counterLog--;
 			}
 			previousSpawnedY = false;
